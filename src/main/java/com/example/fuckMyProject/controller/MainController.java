@@ -9,22 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
-//    @GetMapping("/")
-//    public String root() {
-//        return "index";
-//    }
-
-    @GetMapping("/login")
+    @RequestMapping(value={"/","login"})
     public String login(Model model) {
         return "login";
     }
 
-    @GetMapping("/admin")
+    @RequestMapping("/admin")
     public String admin() {
         return "admin";
     }
 
-    @GetMapping("/user")
+    @RequestMapping("/user")
     public String userIndex() {
         return "index";
     }

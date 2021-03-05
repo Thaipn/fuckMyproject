@@ -61,4 +61,10 @@ public class UserServiceImpl implements UserService {
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Collection<Users> findByEmailEnable(String email, Integer status) {
+        Collection<Users> users = userRepository.findByEmailEnable(email, status);
+        return users;
+    }
 }

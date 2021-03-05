@@ -25,6 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN");
         http
             .authorizeRequests()
+                .antMatchers("/admin/**")
+                    .hasAnyRole("ROLE_ADMIN")
                 .antMatchers(
                         "/registration**",
                         "/js/**",
@@ -38,7 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .usernameParameter("username")//
                     .passwordParameter("password")
-                    .failureUrl("/403")
+//                    .successHandler(successHandler())
+            .and()
+                .exceptionHandling()
+                .accessDeniedPage("/403")
             .and()
                 .logout()
                     .invalidateHttpSession(true)
@@ -67,5 +72,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
+//    @Bean
+//    public CustomSuccessHandler successHandler() {
+//        return new CustomSuccessHandler();
+//    }
 
 }
