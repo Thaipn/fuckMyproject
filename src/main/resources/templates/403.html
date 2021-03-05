@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello mother fucker</title>
+</head>
+<body>
+<h2>Access Denied Page - 403</h2>
+<h3>
+    Hey : <span th:utext="${#request.userPrincipal.name}"></span>
+    - You don't have permission to access this page ! Get out your page !
+</h3>
+
+<a th:href="@{/user}">User Page</a>
+
+<br/><br/>
+<form th:action="@{/j_spring_security_logout}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <input type="submit" value="Logout" />
+</form>
+</body>
+</html>
