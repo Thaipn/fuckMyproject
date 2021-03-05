@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<Users> findByEmailEnable(String email, Integer status) {
-        Collection<Users> users = userRepository.findByEmailEnable(email, 1);
+    public Collection<Users> findByEmailEnable() {
+        Collection<Users> users = userRepository.findByEmailEnable();
         return users;
     }
 }

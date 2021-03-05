@@ -34,7 +34,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
                 admin = true;
             }
         }
-
+        logger.info("Adminnnnnnnnn" +admin);
         if (admin) {
             response.sendRedirect("/admin");
         } else {

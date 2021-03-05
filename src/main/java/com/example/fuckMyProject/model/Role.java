@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @ToString
@@ -18,6 +19,7 @@ public class Role {
     private Long id;
     @Getter
     @Setter
+    @NotEmpty(message = "Role Name can not empty")
     private String name;
 
     public Role(String name) {

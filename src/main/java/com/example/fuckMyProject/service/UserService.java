@@ -12,5 +12,5 @@ public interface UserService extends UserDetailsService {
 
     Users save(UserRegistrationDto registration);
 
-    Collection<Users> findByEmailEnable(String email, Integer status);
+    Collection<Users> findByEmailEnable();
 }

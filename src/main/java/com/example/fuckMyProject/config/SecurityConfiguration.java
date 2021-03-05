@@ -19,13 +19,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 			.antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN");
         http
             .authorizeRequests()
-                .antMatchers("/admin/**")
+                .antMatchers("/admin")
                     .hasAnyRole("ROLE_ADMIN")
                 .antMatchers(
                         "/registration**",
@@ -36,14 +39,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
             .and()
                 .formLogin()
+                    .successHandler(customizeAuthenticationSuccessHandler)
                     .loginPage("/login")
                     .permitAll()
                     .usernameParameter("username")//
                     .passwordParameter("password")
 //                    .successHandler(successHandler())
-            .and()
-                .exceptionHandling()
-                .accessDeniedPage("/403")
+//            .and()
+//                .exceptionHandling()
+//                .accessDeniedPage("/403")
             .and()
                 .logout()
                     .invalidateHttpSession(true)
@@ -51,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/login?logout")
                     .permitAll();
+        http.exceptionHandling().accessDeniedPage("/403");
 //        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 //        http.csrf().disable();
     }
