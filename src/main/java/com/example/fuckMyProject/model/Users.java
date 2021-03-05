@@ -17,6 +17,7 @@ public class Users {
     private String lastName;
     private String email;
     private String password;
+    private Integer status;
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

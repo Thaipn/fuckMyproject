@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(registration.getLastName());
         user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
+        user.setStatus(1);
         user.setRoles(role);
         return userRepository.save(user);
     }
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Users> findByEmailEnable(String email, Integer status) {
-        Collection<Users> users = userRepository.findByEmailEnable(email, status);
+        Collection<Users> users = userRepository.findByEmailEnable(email, 1);
         return users;
     }
 }
